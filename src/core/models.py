@@ -99,7 +99,7 @@ class LeadModel(BaseModel):
 
     def __str__(self):
         return self.designation
-    
+
 
 # Client model
 class ClientModel(BaseModel):
