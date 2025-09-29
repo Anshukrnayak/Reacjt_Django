@@ -104,3 +104,16 @@ class LeadModel(BaseModel):
 # Client model
 class ClientModel(BaseModel):
     full_name=models.CharField(max_length=50,null=True,blank=True)
+    email=models.EmailField(unique=True)
+    contact=models.IntegerField()
+    status=models.CharField(choices=(('Pending','Pending'),('Completed','Completed'),('Done','Done')))
+
+    def __str__(self):
+        return self.full_name
+    """
+    Applying indexing in email and contact fields 
+    """
+    class Meta:
+        indexes=[
+            models.Index(fields=['email','contact'])
+        ]
