@@ -19,7 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
+    'core',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # settings.py
-AUTH_USER_MODEL = 'accounts.User'  # app_name.ModelName
+AUTH_USER_MODEL = 'core.CustomUser'  # app_name.ModelName
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',

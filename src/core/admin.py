@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import ClientModel,DesignationModel,LeadModel
 
-# Register your models here.
+admin.site.register(DesignationModel)
+admin.site.register(ClientModel)
+admin.site.register(LeadModel)
