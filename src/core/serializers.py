@@ -10,7 +10,7 @@ class DesignationSerializer(serializers.ModelSerializer):
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model=ClientModel
-        fields='__all__'
+        fields=['full_name','email','contact']
 
 
 class LeadClientSerializer(serializers.ModelSerializer):
@@ -23,5 +23,5 @@ class LeadClientSerializer(serializers.ModelSerializer):
 class LeadSerializer(serializers.ModelSerializer):
     class Meta:
         model=LeadModel
-        fields=['user','designation','salary','experience']
+        fields=['designation','salary','experience']
 
