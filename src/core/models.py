@@ -41,7 +41,7 @@ class CustomManager(UserManager):
 
         return self.create_user(email, password, **extra_fields)
 
-class CustomUser(AbstractBaseUser, PermissionsMixin, PartitionedModel):
+class CustomUser(AbstractBaseUser, PermissionsMixin, PartitionedModel,BaseModel):
     """
     Optimized user model for 1M+ users
     """

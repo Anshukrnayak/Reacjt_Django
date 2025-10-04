@@ -7,7 +7,9 @@ from .models import DesignationModel,LeadModel,ClientModel
 from .serializers import DesignationSerializer,LeadSerializer,ClientSerializer,LeadClientSerializer
 from .permission_mixin import AuthenticationBasePermissionMixin
 from django.core.cache import cache
-
+from .tasks import send_email_task, send_welcome_email
+from django.contrib.auth.decorators import login_required
+from rest_framework.views import APIView
 
 class DesignationApiView(APIView):
     permission_classes = [IsAuthenticated]  # Fixed duplicate permission
@@ -201,3 +203,29 @@ class ClientRetrieveUpdateDestroyed(APIView):
         cache.delete(f'client_{kwargs["pk"]}')
         cache.delete(f'user_clients_{user_id}')
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+"""
+ Simple Email service for info user : 
+"""
+
+# Simple email
+@login_required
+def some_view(request):
+    # This will run in background
+    send_email_task.delay(
+        "Test Subject",
+        "This is a test message",
+        [f"{request.user.email}"]
+    )
+    return Response("Email queued!")
+
+# Welcome email
+@login_required
+def register_user(request):
+    # After user registration
+    send_welcome_email.delay(
+        user_email=f"{request.user.email}",
+        username=f"{request.user.username}"
+    )
+    return Response("Registration complete! Welcome email sent.")

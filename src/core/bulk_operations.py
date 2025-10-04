@@ -1,4 +1,6 @@
-rom django.db import transaction, connection
+from src.core.models import CustomUser, ClientModel
+
+from django.db import transaction, connection
 from django.db.models import Q
 import logging
 
